@@ -1,0 +1,6 @@
+framework module Pods_DezervTest {
+  umbrella header "Pods-DezervTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
