@@ -31,17 +31,20 @@ extension FetchProductsService {
                 }
             }
             else {
-                DispatchQueue.main.async {
-                    vc.hideLoading()
-                    vc.title = "Products List"
-                    vc.productsArray = responseData
-                    vc.tableView.reloadData()
+                self.saveRealmArray(responseData)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                setupTableView()
                 }
             }
-        }        
+        }
+        
+        // MARK: - Link Datasource and Tableview
+        func setupTableView() {
+            vc.hideLoading()
+            let results =  ProductResponse.getAllProducts()
+            vc.productsArray = results.compactMap{$0}
+            vc.tableView.reloadData()
+        }
         return vc
     }
-    
 }
-
-

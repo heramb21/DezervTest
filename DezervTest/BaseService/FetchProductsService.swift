@@ -27,6 +27,13 @@ class FetchProductsService: BaseService<[ProductResponse]> {
     func fetch() -> SafeSignal<[ProductResponse]> {
         return ProductResponse.getProducts().response(using: client).debug()
     }
+    
+    func saveRealmArray(_ objects: [Object]) {
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(objects)
+            }
+        }
 }
 
 

@@ -26,4 +26,11 @@ extension ProductResponse {
         }
     }
     
+    static func getAllProducts() -> Results<ProductResponse> {
+        let realm = try? Realm()
+        let results = realm?.objects(ProductResponse.self)
+        return results!
+    }
+    
+    
 }
